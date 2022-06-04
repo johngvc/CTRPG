@@ -10,18 +10,17 @@ public class AttackableEntity : GameEntity
     public int matk;
     public int initiative;
     public bool alive;
-    public List<Action> _actions;
+    public List<IActionable> actions;
 
-    public AttackableEntity(Dictionary<string, dynamic> characterStats, List<Action> actions)
+    public AttackableEntity(Dictionary<string, dynamic> characterStats)
     {
         hp = characterStats["hp"];
         sp = characterStats["sp"];
         initiative = characterStats["initiative"];
         atk = characterStats["atk"];
         matk = characterStats["matk"];
-        _actions = actions;
+        actions = characterStats["actions"];
         alive = true;
-
     }
 
     public void takeDamage(int damage) 

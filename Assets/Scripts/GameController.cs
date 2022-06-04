@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
         { "initiative", 15 },
         { "atk", 15 },
         { "matk", 10 },
-        { "actions", new List<Action> 
+        { "actions", new List<IActionable> 
             {
                 new Action(15, "Super normal sword attack")
             }
