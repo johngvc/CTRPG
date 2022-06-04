@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public enum GameStates
+    public List<AttackableEntity> Enemies;
+
+    public List<AttackableEntity> Players;
+
+    public GameState CurrentGameState;
+
+    public GameObject AttackableEntity;
+
+    public enum GameState
     {
         StartScreen,
         Battle,
@@ -12,7 +20,7 @@ public class GameController : MonoBehaviour
     }
 
     //MOCK
-    public Dictionary<string, dynamic> Char1 = new Dictionary<string, dynamic>()
+    public Dictionary<string, dynamic> char1 = new Dictionary<string, dynamic>()
     {
         { "Hp", 100 },
         { "sp", 30 },
@@ -26,7 +34,7 @@ public class GameController : MonoBehaviour
         }
     };
 
-    public Dictionary<string, dynamic> Enemy1 = new Dictionary<string, dynamic>()
+    public Dictionary<string, dynamic> enemy1 = new Dictionary<string, dynamic>()
     {
         { "Hp", 1000 },
         { "sp", 3000 },
@@ -40,21 +48,13 @@ public class GameController : MonoBehaviour
         }
     };
 
-    public List<AttackableEntity> Enemies;
-
-    public List<AttackableEntity> Players;
-
-    public GameStates GameState;
-
-    public GameObject AttackableEntity;
-
     // Start is called before the first frame update
     void Start()
     {
-        GameState = GameStates.StartScreen;
+        CurrentGameState = GameState.StartScreen;
 
-        Enemies.Add(new AttackableEntity(Enemy1));
-        Players.Add(new AttackableEntity(Char1));
+        Enemies.Add(new AttackableEntity(enemy1));
+        Players.Add(new AttackableEntity(char1));
     }
 
     // Update is called once per frame

@@ -5,11 +5,17 @@ using UnityEngine;
 public class AttackableEntity : GameEntity
 {
     public int Hp;
+    
     public int Sp;
+    
     public int Atk;
+    
     public int Matk;
+    
     public int Initiative;
+    
     public bool Alive;
+    
     public List<IActionable> Actions;
 
     public AttackableEntity(Dictionary<string, dynamic> characterStats)
