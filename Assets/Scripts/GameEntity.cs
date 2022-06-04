@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GameEntity : MonoBehaviour
 {
-    public string entityName;
+    public string EntityName;
 }

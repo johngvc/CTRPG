@@ -12,28 +12,28 @@ public class GameController : MonoBehaviour
     }
 
     //MOCK
-    public Dictionary<string, dynamic> char1 = new Dictionary<string, dynamic>()
+    public Dictionary<string, dynamic> Char1 = new Dictionary<string, dynamic>()
     {
-        { "hp", 100 },
+        { "Hp", 100 },
         { "sp", 30 },
-        { "initiative", 15 },
-        { "atk", 15 },
-        { "matk", 10 },
-        { "actions", new List<IActionable> 
+        { "Initiative", 15 },
+        { "Atk", 15 },
+        { "Matk", 10 },
+        { "Actions", new List<IActionable> 
             {
                 new Action(15, "Super normal sword attack")
             }
         }
     };
 
-    public Dictionary<string, dynamic> enemy1 = new Dictionary<string, dynamic>()
+    public Dictionary<string, dynamic> Enemy1 = new Dictionary<string, dynamic>()
     {
-        { "hp", 1000 },
+        { "Hp", 1000 },
         { "sp", 3000 },
-        { "initiative", 155 },
-        { "atk", 25 },
-        { "matk", 20 },
-        { "actions", new List<IActionable> 
+        { "Initiative", 155 },
+        { "Atk", 25 },
+        { "Matk", 20 },
+        { "Actions", new List<IActionable> 
             {
                 new Action(0, "Super hard boss attack") //TO-DO: binder error
             }
@@ -44,15 +44,17 @@ public class GameController : MonoBehaviour
 
     public List<AttackableEntity> Players;
 
-    public GameStates gameState;
+    public GameStates GameState;
+
+    public GameObject AttackableEntity;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameState = GameStates.StartScreen;
+        GameState = GameStates.StartScreen;
 
-        Enemies.Add(new AttackableEntity(enemy1));
-        Players.Add(new AttackableEntity(char1));
+        Enemies.Add(new AttackableEntity(Enemy1));
+        Players.Add(new AttackableEntity(Char1));
     }
 
     // Update is called once per frame

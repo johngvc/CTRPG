@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IActionable
 {
-    void execute(AttackableEntity target, AttackableEntity origin);
+    void Execute(AttackableEntity target, AttackableEntity origin);
 }

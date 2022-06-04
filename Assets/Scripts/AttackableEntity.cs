@@ -4,45 +4,45 @@ using UnityEngine;
 
 public class AttackableEntity : GameEntity
 {
-    public int hp;
-    public int sp;
-    public int atk;
-    public int matk;
-    public int initiative;
-    public bool alive;
-    public List<IActionable> actions;
+    public int Hp;
+    public int Sp;
+    public int Atk;
+    public int Matk;
+    public int Initiative;
+    public bool Alive;
+    public List<IActionable> Actions;
 
     public AttackableEntity(Dictionary<string, dynamic> characterStats)
     {
-        hp = characterStats["hp"];
-        sp = characterStats["sp"];
-        initiative = characterStats["initiative"];
-        atk = characterStats["atk"];
-        matk = characterStats["matk"];
-        actions = characterStats["actions"];
-        alive = true;
+        Hp = characterStats["Hp"];
+        Sp = characterStats["Sp"];
+        Initiative = characterStats["Initiative"];
+        Atk = characterStats["Atk"];
+        Matk = characterStats["Matk"];
+        Actions = characterStats["Actions"];
+        Alive = true;
     }
 
-    public void takeDamage(int damage) 
+    public void TakeDamage(int damage) 
     {
-        hp -= damage;
+        Hp -= damage;
 
-        Debug.Log($"{name} took {damage} damage points. Remaining hp: {hp}");
+        Debug.Log($"{EntityName} took {damage} damage points. Remaining Hp: {Hp}");
 
-        if (hp <= 0)
+        if (Hp <= 0)
         {
-            die();
+            _die();
         }
     }
 
-    public void deduceSp(int spCost)
+    public void DeduceSp(int spCost)
     {
-        sp -= spCost;
+        Sp -= spCost;
     }
 
-    private void die() 
+    private void _die() 
     {
-        Debug.Log($"You've defeated {name}");
-        alive = false;
+        Debug.Log($"You've defeated {EntityName}");
+        Alive = false;
     }
 }
