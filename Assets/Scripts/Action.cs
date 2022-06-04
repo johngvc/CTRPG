@@ -16,6 +16,8 @@ public class Action : IActionable
     public void Execute(AttackableEntity target, AttackableEntity origin)
     {
         if (NotEnoughSp(origin)) { return; }
+
+        target.TakeDamage(origin.Atk);
     }
 
     private bool NotEnoughSp(AttackableEntity origin)
