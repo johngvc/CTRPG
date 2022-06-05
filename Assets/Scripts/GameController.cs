@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public List<AttackableEntity> Enemies;
+    public List<GameObject> Enemies;
 
-    public List<AttackableEntity> Players;
+    public List<GameObject> Players;
 
     public GameState CurrentGameState;
 
@@ -59,13 +59,19 @@ public class GameController : MonoBehaviour
     {
         CurrentGameState = GameState.StartScreen;
 
-        var instantiatedAttackableEntity = Instantiate(AttackableEntityPrefab, DefaultPosition, DefaultRotation);
-        
-        var componentAttackableEntity = instantiatedAttackableEntity.GetComponent<AttackableEntity>() as AttackableEntity;
+        Players.Add(_instantiateAndInitializePrefab(
+                            prefab: AttackableEntityPrefab,
+                            initialArgs: char1,
+                            position: DefaultPosition,
+                            rotation: DefaultRotation
+                           ));
 
-        Debug.Log(componentAttackableEntity.Hp);
-
-        componentAttackableEntity.Init(char1);
+        Enemies.Add(_instantiateAndInitializePrefab(
+                            prefab: AttackableEntityPrefab,
+                            initialArgs: enemy1,
+                            position: DefaultPosition,
+                            rotation: DefaultRotation
+                           ));
 
     }
 
@@ -73,5 +79,21 @@ public class GameController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private GameObject _instantiateAndInitializePrefab(
+                                    GameObject prefab, 
+                                    Dictionary<string, dynamic> initialArgs, 
+                                    Vector3? position = null, 
+                                    Quaternion? rotation = null
+                                    )
+    {
+        var instantiatedGameObject = Instantiate(prefab, DefaultPosition, DefaultRotation);
+        // Type scriptType = scriptName.GetType();
+        var gameObjectComponent = instantiatedGameObject.GetComponent<AttackableEntity>();
+
+        gameObjectComponent.Init(initialArgs);
+
+        return instantiatedGameObject;
     }
 }
