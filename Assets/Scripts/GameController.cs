@@ -30,11 +30,11 @@ public class GameController : MonoBehaviour
         { "Hp", 100 },
         { "Sp", 30 },
         { "Initiative", 15 },
-        { "Atk", 15 },
+        { "Atk", 20 },
         { "Matk", 10 },
         { "Actions", new List<IActionable> 
             {
-                new Action() 
+                new SuperNormalSwordAttack() 
             }
         }
     };
@@ -45,11 +45,11 @@ public class GameController : MonoBehaviour
         { "Hp", 1000 },
         { "Sp", 3000 },
         { "Initiative", 155 },
-        { "Atk", 25 },
+        { "Atk", 15 },
         { "Matk", 20 },
         { "Actions", new List<IActionable> 
             {
-                new Action() 
+                new SuperBallOfDestruction() 
             }
         }
     };
