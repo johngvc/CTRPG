@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Action : IActionable
-{
-    int SpCost;
-    string Name;
+[CreateAssetMenu(fileName = "New Command", menuName = "CTRPG/Command", order = 0)]
 
-    public Action(int spCost, string name)
-    {
-        SpCost = spCost;
-        Name = name;
-    }
+public class Action : ScriptableObject, IActionable
+{
+    public int SpCost;
+    public string Name;
 
     public void Execute(AttackableEntity target, AttackableEntity origin)
     {
         if (NotEnoughSp(origin)) { return; }
 
         target.TakeDamage(origin.Atk);
+        origin.DeduceSp(SpCost);
     }
 
     private bool NotEnoughSp(AttackableEntity origin)

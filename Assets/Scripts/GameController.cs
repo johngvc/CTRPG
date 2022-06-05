@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
 
     public Quaternion DefaultRotation = Quaternion.identity;
 
+    public List<ScriptableObject> Skills = new List<ScriptableObject>();
+
     public enum GameState
     {
         StartScreen,
@@ -32,11 +34,11 @@ public class GameController : MonoBehaviour
         { "Initiative", 15 },
         { "Atk", 15 },
         { "Matk", 10 },
-        { "Actions", new List<IActionable> 
-            {
-                new Action(15, "Super normal sword attack")
-            }
-        }
+        // { "Actions", new List<IActionable> 
+        //     {
+        //         ScriptableObject.CreateInstance<Action>() // .Init(15, "Super normal sword attack")
+        //     }
+        // }
     };
 
     public Dictionary<string, dynamic> enemy1 = new Dictionary<string, dynamic>()
@@ -47,17 +49,19 @@ public class GameController : MonoBehaviour
         { "Initiative", 155 },
         { "Atk", 25 },
         { "Matk", 20 },
-        { "Actions", new List<IActionable> 
-            {
-                new Action(0, "Super hard boss attack") //TO-DO: binder error
-            }
-        }
+        // { "Actions", new List<IActionable> 
+        //     {
+        //         ScriptableObject.CreateInstance<Action>() // .Init(0, "Super hard boss attack")
+        //     }
+        // }
     };
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentGameState = GameState.StartScreen;
+
+        Skills.Add(ScriptableObject.CreateInstance<Action>());
 
         Players.Add(_instantiateAndInitializePrefab(
                             prefab: AttackableEntityPrefab,
