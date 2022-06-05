@@ -10,7 +10,11 @@ public class GameController : MonoBehaviour
 
     public GameState CurrentGameState;
 
-    public GameObject AttackableEntity;
+    public GameObject AttackableEntityPrefab;
+
+    public Vector3 DefaultPosition = new Vector3(0, 0, 0);
+
+    public Quaternion DefaultRotation = Quaternion.identity;
 
     public enum GameState
     {
@@ -22,8 +26,9 @@ public class GameController : MonoBehaviour
     //MOCK
     public Dictionary<string, dynamic> char1 = new Dictionary<string, dynamic>()
     {
+        { "EntityName", "Player One"},
         { "Hp", 100 },
-        { "sp", 30 },
+        { "Sp", 30 },
         { "Initiative", 15 },
         { "Atk", 15 },
         { "Matk", 10 },
@@ -36,8 +41,9 @@ public class GameController : MonoBehaviour
 
     public Dictionary<string, dynamic> enemy1 = new Dictionary<string, dynamic>()
     {
+        { "EntityName", "Enemy One"},
         { "Hp", 1000 },
-        { "sp", 3000 },
+        { "Sp", 3000 },
         { "Initiative", 155 },
         { "Atk", 25 },
         { "Matk", 20 },
@@ -53,8 +59,14 @@ public class GameController : MonoBehaviour
     {
         CurrentGameState = GameState.StartScreen;
 
-        Enemies.Add(new AttackableEntity(enemy1));
-        Players.Add(new AttackableEntity(char1));
+        var instantiatedAttackableEntity = Instantiate(AttackableEntityPrefab, DefaultPosition, DefaultRotation);
+        
+        var componentAttackableEntity = instantiatedAttackableEntity.GetComponent<AttackableEntity>() as AttackableEntity;
+
+        Debug.Log(componentAttackableEntity.Hp);
+
+        componentAttackableEntity.Init(char1);
+
     }
 
     // Update is called once per frame

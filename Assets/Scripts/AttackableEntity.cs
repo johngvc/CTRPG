@@ -18,8 +18,9 @@ public class AttackableEntity : GameEntity
 
     public List<IActionable> Actions;
 
-    public AttackableEntity(Dictionary<string, dynamic> characterStats)
-    {
+    public void Init(Dictionary<string, dynamic> characterStats)
+    {   
+        EntityName = characterStats["EntityName"];
         Hp = characterStats["Hp"];
         Sp = characterStats["Sp"];
         Initiative = characterStats["Initiative"];
