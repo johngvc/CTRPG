@@ -154,7 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies: []
   Players: []
-  gameState: 0
+  CurrentGameState: 0
+  AttackableEntityPrefab: {fileID: 4034356055637207000, guid: 32439ecce5f28594985e2f861c5b505c, type: 3}
+  DefaultPosition: {x: 0, y: 0, z: 0}
+  DefaultRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!4 &259774508
 Transform:
   m_ObjectHideFlags: 0
