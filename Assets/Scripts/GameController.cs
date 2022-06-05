@@ -73,6 +73,9 @@ public class GameController : MonoBehaviour
                             rotation: DefaultRotation
                            ));
 
+        var player = Players[0].GetComponent<AttackableEntity>();
+        var enemy = Enemies[0].GetComponent<AttackableEntity>();
+        player.Actions[0].Execute(target: enemy, origin: player);
     }
 
     // Update is called once per frame
@@ -89,7 +92,6 @@ public class GameController : MonoBehaviour
                                     )
     {
         var instantiatedGameObject = Instantiate(prefab, DefaultPosition, DefaultRotation);
-        // Type scriptType = scriptName.GetType();
         var gameObjectComponent = instantiatedGameObject.GetComponent<AttackableEntity>();
 
         gameObjectComponent.Init(initialArgs);
