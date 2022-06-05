@@ -4,23 +4,16 @@ using UnityEngine;
 
 public class Action : IActionable
 {
-    int SpCost;
-    string Name;
+    public int SpCost;
+    public string Name;
 
-    public Action(int spCost, string name)
-    {
-        SpCost = spCost;
-        Name = name;
+    public virtual void Execute(AttackableEntity target, AttackableEntity origin){
+        if (_notEnoughSp(origin)) { return; }
+
+        origin.DeduceSp(SpCost);
     }
 
-    public void Execute(AttackableEntity target, AttackableEntity origin)
-    {
-        if (NotEnoughSp(origin)) { return; }
-
-        target.TakeDamage(origin.Atk);
-    }
-
-    private bool NotEnoughSp(AttackableEntity origin)
+    protected bool _notEnoughSp(AttackableEntity origin)
     {
         return origin.Sp < SpCost;
     }
