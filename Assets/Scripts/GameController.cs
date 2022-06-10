@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -15,6 +16,8 @@ public class GameController : MonoBehaviour
     public Vector3 DefaultPosition = new Vector3(0, 0, 0);
 
     public Quaternion DefaultRotation = Quaternion.identity;
+
+    public TurnSystem TurnSystem;
 
     public enum GameState
     {
@@ -59,6 +62,25 @@ public class GameController : MonoBehaviour
     {
         CurrentGameState = GameState.StartScreen;
 
+        mockEnemies();
+        TurnSystem = new TurnSystem(GetAllCharacters());
+        
+
+        var player = Players[0].GetComponent<AttackableEntity>();
+        var enemy = Enemies[0].GetComponent<AttackableEntity>();
+        player.Actions[0].Execute(target: enemy, origin: player);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void mockEnemies() {
+        // Delete this in the future
+
         Players.Add(_instantiateAndInitializePrefab(
                             prefab: AttackableEntityPrefab,
                             initialArgs: char1,
@@ -71,17 +93,20 @@ public class GameController : MonoBehaviour
                             initialArgs: enemy1,
                             position: DefaultPosition,
                             rotation: DefaultRotation
-                           ));
-
-        var player = Players[0].GetComponent<AttackableEntity>();
-        var enemy = Enemies[0].GetComponent<AttackableEntity>();
-        player.Actions[0].Execute(target: enemy, origin: player);
+                           ));        
     }
 
-    // Update is called once per frame
-    void Update()
+    private List<AttackableEntity> GetAllCharacters() {
+        var allCharacters = new List<AttackableEntity>(Players.Count + Enemies.Count);
+        allCharacters.AddRange(ConvertGameObjectToComponent(Players));
+        allCharacters.AddRange(ConvertGameObjectToComponent(Enemies));
+        return allCharacters;
+    }
+
+    private List<AttackableEntity> ConvertGameObjectToComponent(List<GameObject> gameObjectList)
     {
-        
+        var convertedObjects = gameObjectList.Select(x => x.GetComponent<AttackableEntity>());
+        return new List<AttackableEntity>(convertedObjects);
     }
 
     private GameObject _instantiateAndInitializePrefab(
