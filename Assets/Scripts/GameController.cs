@@ -106,6 +106,24 @@ public class GameController : MonoBehaviour
         { "ControllingEntity", new Conservative() }
     };
 
+    public Dictionary<string, dynamic> ControllingPlayer = new Dictionary<string, dynamic>()
+    {
+        { "EntityName", "Player Three"},
+        { "Type", AttackableEntityType.Player },
+        { "Hp", 20000 },
+        { "Sp", 3000 },
+        { "Initiative", 250 },
+        { "Atk", 15 },
+        { "Matk", 20 },
+        { "Actions", new List<IActionable> 
+            {
+                new SuperBallOfDestruction(),
+                new Suwooshu()
+            }
+        },
+        { "ControllingEntity", null }
+    };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -116,15 +134,6 @@ public class GameController : MonoBehaviour
         TurnSystem = new TurnSystem(GetAllCharacters());
 
         EventSystem.TurnFinished(TurnSystem.GetCurrentCharacter().Id);
-
-
-        
-
-        // Legacy Test Code
-        // var player = Players[0].GetComponent<AttackableEntity>();
-        // var enemy = Enemies[0].GetComponent<AttackableEntity>();
-        // player.Actions[0].Execute(target: enemy, origin: player);
-
     }
 
     // Update is called once per frame
@@ -168,6 +177,12 @@ public class GameController : MonoBehaviour
         Enemies.Add(_instantiateAndInitializePrefab(
                             prefab: AttackableEntityPrefab,
                             initialArgs: enemy2,
+                            position: DefaultPosition,
+                            rotation: DefaultRotation
+                           ));
+        Players.Add(_instantiateAndInitializePrefab(
+                            prefab: AttackableEntityPrefab,
+                            initialArgs: ControllingPlayer,
                             position: DefaultPosition,
                             rotation: DefaultRotation
                            ));  

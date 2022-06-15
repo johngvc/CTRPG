@@ -42,9 +42,11 @@ public class AttackableEntity : GameEntity
         Alive = true;
 
         ControllingEntity = characterStats["ControllingEntity"];
-        ControllingEntity.Init(this, GameController);
-
-        GameController.EventSystem.onTurnFinished += TakeAction;
+        if (ControllingEntity != null) 
+        {
+            ControllingEntity.Init(this, GameController);
+            GameController.EventSystem.onTurnFinished += TakeAction;
+        }
     }
 
     public void TakeAction(string currentTurnEntityId) {
