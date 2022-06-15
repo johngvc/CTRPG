@@ -8,9 +8,13 @@ public class AttackableEntity : GameEntity
     public string Id;
 
     public AttackableEntityType Type;
-    public int Hp;
+    public int CurrentHp;
 
-    public int Sp;
+    public int MaxHp;
+
+    public int CurrentSp;
+
+    public int MaxSp;
 
     public int Atk;
 
@@ -32,8 +36,10 @@ public class AttackableEntity : GameEntity
 
         EntityName = characterStats["EntityName"];
         Type = characterStats["Type"];
-        Hp = characterStats["Hp"];
-        Sp = characterStats["Sp"];
+        MaxHp = characterStats["MaxHp"];
+        MaxSp = characterStats["MaxSp"];
+        CurrentHp = MaxHp;
+        CurrentSp = MaxSp;
         Initiative = characterStats["Initiative"];
         Atk = characterStats["Atk"];
         Matk = characterStats["Matk"];
@@ -58,11 +64,11 @@ public class AttackableEntity : GameEntity
 
     public void TakeDamage(int damage) 
     {
-        Hp -= damage;
+        CurrentHp -= damage;
 
-        Debug.Log($"{EntityName} took {damage} damage points. \n Remaining Hp: {Hp} \n Remaining Sp: {Sp}");
+        Debug.Log($"{EntityName} took {damage} damage points. \n Remaining Hp: {CurrentHp} \n Remaining Sp: {CurrentSp}");
 
-        if (Hp <= 0)
+        if (CurrentHp <= 0)
         {
             _die();
         }
@@ -70,7 +76,7 @@ public class AttackableEntity : GameEntity
 
     public void DeduceSp(int spCost)
     {
-        Sp -= spCost;
+        CurrentSp -= spCost;
     }
 
     private void _die() 

@@ -32,6 +32,6 @@ public class EntityAction
 
     protected bool _notEnoughSp(AttackableEntity origin)
     {
-        return origin.Sp < SpCost;
+        return origin.CurrentSp < SpCost;
     }
 }
